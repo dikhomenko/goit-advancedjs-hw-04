@@ -6,11 +6,11 @@ import SortCss from 'postcss-sort-media-queries';
 
 export default defineConfig(({ command }) => {
   return {
-    base: 'goit-advancedjs-hw-03',
     define: {
       [command === 'serve' ? 'global' : '_global']: {},
     },
     root: 'src',
+    base: '/goit-advancedjs-hw-04/',
     build: {
       sourcemap: true,
       rollupOptions: {

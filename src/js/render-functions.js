@@ -1,10 +1,8 @@
-import iziToast from "izitoast";
-import SimpleLightbox from "simplelightbox";
+import iziToast from 'izitoast';
+import SimpleLightbox from 'simplelightbox';
 
 export function renderGallery(images) {
     const galleryContainer = document.getElementById('gallery');
-    galleryContainer.innerHTML = '';  // Очищуємо галерею
-
     const markup = images.map(image => `
         <a href="${image.largeImageURL}" class="gallery-item">
             <img src="${image.webformatURL}" alt="${image.tags}">
@@ -18,8 +16,6 @@ export function renderGallery(images) {
     `).join('');
 
     galleryContainer.insertAdjacentHTML('beforeend', markup);
-
-    // Оновлюємо SimpleLightbox після додавання нових зображень
     new SimpleLightbox('.gallery a').refresh();
 }
 
@@ -36,4 +32,21 @@ export function showLoader() {
 
 export function hideLoader() {
     document.getElementById('loader').style.display = 'none';
+}
+
+export function toggleLoadMoreButton(show) {
+    const loadMoreBtn = document.getElementById('load-more');
+    if (show) {
+        loadMoreBtn.style.display = 'block';
+    } else {
+        loadMoreBtn.style.display = 'none';
+    }
+}
+
+export function scrollToNextGroup() {
+    const { height: cardHeight } = document.querySelector('.gallery').firstElementChild.getBoundingClientRect();
+    window.scrollBy({
+        top: cardHeight * 2,
+        behavior: 'smooth',
+    });
 }
